@@ -1,0 +1,51 @@
+<div class="row">
+  <form class="form-inline">
+    <div class="row g-3">
+      <div class="col-8 position-relative">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            name="search"
+            placeholder="Search..."
+            [(ngModel)]="searchTerm"
+            (keydown)="autoSearch()"
+            (focusin)="autoSearch()"
+            autocomplete="off"
+          />
+
+          <select class="form-select" name="marketSelect" (change)="selectChangeHandler($event)" ngModel>
+            <option value="" >All Markets</option>
+            <option [value]="market.name" *ngFor="let market of markets">{{market.name}} - <strong>{{market.state}}</strong></option>
+          </select>
+        </div>
+
+        <div class="suggestions shadow bg-white rounded" *ngIf="resultsPresent">
+          <a
+            class="search-item text-secondary"
+            *ngFor="let res of resultData"
+            (click)="resultClickHandler(res)"
+          >
+            {{ res['name'] }} <small *ngIf="res.hasOwnProperty('formerName') && res.formerName" class="text-muted text-small"> | {{res['formerName']}}</small>
+          <span class="info d-flex flex-row justify-content-start text-secondary align-items-baseline">
+            <span class="fw-bold badge bg-secondary">{{res.market}}</span>
+            <span class="badge bg-secondary">{{res.state}}</span>
+            <span [ngClass]="res.hasOwnProperty('formerName') ? 'badge bg-warning' : 'badge bg-success'">{{res.hasOwnProperty('formerName') ? 'Property' : 'Company'}}</span>
+          </span>
+          </a>
+        </div>
+      </div>
+      <div class="col-4 d-flex btn-actions">
+        <button class="btn btn-primary" (click)="autoSearch()" type="submit">
+          Search
+        </button>
+        <button class="btn btn-secondary" (click)="clear()" type="button">
+          Clear
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="row px-3" *ngIf="selectedResult">
+  <pre class="result-area">{{selectedResult | json}}</pre>
+</div>

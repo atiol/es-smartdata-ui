@@ -1,0 +1,76 @@
+:host {
+  form {
+    .row {
+      .input-group {
+        input {
+          flex-grow: 3;
+        }
+
+        .form-control, .form-select {
+          &:focus {
+            box-shadow: none;
+
+          }
+        }
+      }
+
+      .suggestions {
+        position: absolute;
+        width: 98%;
+        max-height: 300px;
+        z-index: 2;
+        padding: 15px 8px;
+        overflow: auto;
+
+        a.search-item {
+          padding: 5px 8px;
+          cursor: pointer;
+          text-decoration: none;
+          display: block;
+          color: #000;
+
+          &:hover {
+            background-color: whitesmoke;
+          }
+
+          .info {
+            span {
+              margin-right: 4px;
+            }
+          }
+        }
+      }
+
+      .btn-actions {
+        align-items: flex-end;
+
+        button {
+          margin-right: 8px;
+        }
+      }
+    }
+
+    & > div {
+      margin: 24px 0;
+    }
+  }
+
+  .card {
+    .card-text {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  .result-area {
+    padding: 24px;
+    width: auto;
+    border-radius: 5px;
+    background-color: whitesmoke;
+  }
+}
